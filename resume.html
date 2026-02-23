@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Review</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="banner">
+      <img src="banner.jpg" alt="Banner" onerror="this.style.display='none'">
+      <div class="overlay">
+        <h1>📄 Resume Review</h1>
+        <p>Paste your resume below to receive detailed feedback</p>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+  </header>
+
+  <main>
+    <div class="resume-wrapper">
+      <label for="resumeInput" style="font-weight:600;">Paste Your Resume Text:</label>
+      <textarea id="resumeInput" placeholder="Paste your resume content here..."></textarea>
+      <button onclick="reviewResume()">🔍 Review My Resume</button>
+      <div id="resumeFeedback" class="feedback-box hidden"></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

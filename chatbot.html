@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Interview Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="banner">
+      <div class="overlay">
+        <h1>💬 AI Interview Chatbot</h1>
+        <p>Ask anything about interviews and get helpful guidance!</p>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+  </header>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Ask an interview question..." onkeydown="if(event.key==='Enter') sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+    <p style="text-align:center;font-size:0.8rem;color:#999;margin-top:8px;">
+      Try: "Tell me about yourself" • "What are your weaknesses?" • "STAR method" • "Salary negotiation"
+    </p>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+
+    window.onload = () => {
+      appendMessage('bot', "👋 Hi! I'm your Interview Prep Assistant.\n\nAsk me about any common interview question or topic, for example:\n• Tell me about yourself\n• What are your weaknesses?\n• How do I use the STAR method?\n• How to handle salary negotiation?\n• How to prepare for an interview?");
+    };
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+      appendMessage('user', msg);
+      input.value = '';
+      const typingEl = showTyping();
+      setTimeout(() => {
+        removeTyping(typingEl);
+        appendMessage('bot', getReply(msg));
+      }, 900);
+    }
+
+    function appendMessage(sender, text) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${sender}`;
+      const avatar = document.createElement('div');
+      avatar.className = `avatar ${sender}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.style.whiteSpace = 'pre-line';
+      bubble.textContent = text;
+      if (sender === 'user') {
+        msgDiv.appendChild(bubble);
+        msgDiv.appendChild(avatar);
+      } else {
+        msgDiv.appendChild(avatar);
+        msgDiv.appendChild(bubble);
+      }
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'message bot';
+      msgDiv.id = 'typingIndicator';
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar bot';
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble typing-indicator';
+      bubble.innerHTML = '<span></span><span></span><span></span>';
+      msgDiv.appendChild(avatar);
+      msgDiv.appendChild(bubble);
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return msgDiv;
+    }
+
+    function removeTyping(el) {
+      if (el && el.parentNode) el.parentNode.removeChild(el);
+    }
+
+    function getReply(input) {
+      const msg = input.toLowerCase().trim();
+
+      if (msg.includes('tell me about yourself') || msg.includes('introduce yourself') || msg.includes('about yourself')) {
+        return `🎯 "Tell me about yourself" — use this 3-part structure:\n\n1. PAST: Your background and education (brief)\n2. PRESENT: Your current skills and what you do\n3. FUTURE: Why you want THIS role\n\n📌 Example: "I'm a CS graduate with a focus on web development. I've built several projects using React and Node.js, and I'm excited about this role because it aligns with my experience and your company's mission in [area]."\n\n⚡ Keep it 60–90 seconds. Don't just read your CV!`;
+      }
+
+      if (msg.includes('strength')) {
+        return `💪 When asked about strengths:\n\n✅ Choose strengths relevant to the job\n✅ Back each one up with a real example\n✅ Aim for 2–3 specific strengths\n\n📌 Example: "One strength is problem-solving. During a project, I debugged a complex API issue under a tight deadline by isolating it step by step — we launched on time."\n\n🚫 Avoid vague claims like "I'm a hard worker" — show it with evidence.`;
+      }
+
+      if (msg.includes('weakness') || msg.includes('weaknesses')) {
+        return `⚠️ "What's your weakness?" — a common trap question.\n\n✅ Pick a REAL weakness (not a fake strength)\n✅ Show self-awareness\n✅ Explain how you're improving it\n\n📌 Example: "I used to struggle with public speaking, so I joined a debate club and volunteered to present at team meetings. I'm noticeably more confident now."\n\n🚫 Avoid: "I'm a perfectionist" — interviewers hear this constantly.`;
+      }
+
+      if (msg.includes('why do you want') || msg.includes('why this company') || msg.includes('why us') || msg.includes('why here')) {
+        return `🏢 "Why do you want to work here?" — research is key.\n\n✅ Research the company before the interview\n✅ Connect their work to YOUR interests and skills\n✅ Be specific — generic answers get filtered out\n\n📌 Example: "I've been following your AI products for a while. Your approach to [specific thing] aligns with my background in [X], and I'd love to contribute to a team doing meaningful work in this space."\n\n⚡ Mention something specific — a product, initiative, or company value.`;
+      }
+
+      if (msg.includes('salary') || msg.includes('pay') || msg.includes('compensation') || msg.includes('ctc')) {
+        return `💰 Salary negotiation tips:\n\n1. Research market rates first (LinkedIn, Glassdoor, Naukri)\n2. If asked first, try: "I'm open to discussing based on the role and responsibilities."\n3. Give a range, not a single number — start slightly above your target\n4. Don't accept immediately — "Could I have a day to consider?" is perfectly professional\n\n⚡ Know your minimum before the interview and don't go below it.`;
+      }
+
+      if (msg.includes('5 year') || msg.includes('five year') || msg.includes('where do you see yourself')) {
+        return `🔭 "Where do you see yourself in 5 years?"\n\nInterviewers want to know: Are you ambitious? Will you stay and grow?\n\n✅ Show realistic ambition\n✅ Tie it to the company's growth path\n\n📌 Example: "I'd like to grow into a senior role — leading projects and mentoring teammates. I see this company as a place where I can develop those skills over time."\n\n🚫 Avoid: "I want to start my own company" — even if true, not the right answer here.`;
+      }
+
+      if (msg.includes('star') || msg.includes('behavioral') || msg.includes('star method')) {
+        return `⭐ The STAR Method — use it for ALL behavioral questions:\n\nS – Situation: What was the context?\nT – Task: What was YOUR responsibility?\nA – Action: What specific steps did YOU take?\nR – Result: What happened? Include numbers if you can.\n\n📌 Example for "Tell me about a challenge":\nS: "Our team hit a critical bug a week before the demo."\nT: "I owned the backend, so fixing it was on me."\nA: "I isolated the issue, patched it, and tested across environments."\nR: "We launched on time and got the top grade."\n\n⚡ Prepare 5–6 STAR stories before any interview.`;
+      }
+
+      if (msg.includes('fail') || msg.includes('mistake') || msg.includes('went wrong')) {
+        return `😬 "Tell me about a failure" — testing your self-awareness.\n\n✅ Choose a REAL failure (not something trivial)\n✅ Own it — don't blame others\n✅ Focus on what you LEARNED and how you changed\n\n📌 Example: "I underestimated a task and missed a sprint deadline. I learned to break work into smaller estimates and flag risks early. I've built buffer time into my planning ever since."\n\n⚡ The learning is the point — always end on what changed.`;
+      }
+
+      if (msg.includes('team') || msg.includes('teamwork') || msg.includes('collaborate')) {
+        return `🤝 Teamwork questions — highlight YOUR specific contribution:\n\n✅ Describe a real team project\n✅ Say what YOU did, not just "we worked together"\n✅ Mention how you handled disagreements or blockers\n\n📌 Example: "In a 4-person project, I handled backend integration and held daily syncs with the frontend dev. When we disagreed on an approach, I suggested prototyping both — we picked the one that performed better."\n\n⚡ Show you can both lead AND follow.`;
+      }
+
+      if (msg.includes('leadership') || msg.includes('led a team') || (msg.includes('lead') && !msg.includes('salary'))) {
+        return `👔 Leadership questions — formal or informal:\n\n✅ Leadership includes: running a project, mentoring a peer, taking initiative\n✅ Use STAR format\n✅ Show HOW you motivated others\n\n📌 Example: "In a hackathon, I stepped up to assign tasks when the team felt stuck. I ran quick stand-ups every 2 hours to unblock people. We placed 2nd out of 20 teams."\n\n⚡ Any group project, club role, or event counts!`;
+      }
+
+      if (msg.includes('pressure') || msg.includes('stress') || msg.includes('deadline') || msg.includes('handle stress')) {
+        return `🔥 "How do you handle pressure?"\n\n✅ Give a real example using STAR\n✅ Mention your actual strategy (not just "I stay calm")\n\n📌 Example: "During finals I was also delivering a freelance project. I time-blocked my day, set mini-deadlines, and communicated progress to my client. I delivered both on time."\n\n💡 Strategies that impress: time-blocking, writing things down, breaking big tasks into small ones, asking for help early.`;
+      }
+
+      if (msg.includes('conflict') || msg.includes('disagree') || msg.includes('difficult person')) {
+        return `🤼 "How do you handle conflict?"\n\n✅ Show maturity — you can disagree professionally\n✅ Never badmouth the other person\n✅ Focus on resolution, not drama\n\n📌 Example: "A teammate and I disagreed on the database structure. I suggested we each present our approach and weigh pros/cons together. We combined both ideas — the result was better than either alone."\n\n⚡ Key: address issues early, keep it professional, focus on what's best for the project.`;
+      }
+
+      if (msg.includes('motivat') || msg.includes('what drives you')) {
+        return `🔋 "What motivates you?" — be genuine.\n\n✅ Connect motivation to something real and role-relevant\n✅ Avoid vague answers like "I'm motivated by success"\n\n📌 Examples that work:\n• "I love solving problems — there's a real rush when a bug finally clicks."\n• "I'm motivated by seeing my work used by real people."\n• "I enjoy keeping up with fast-moving technology."\n\n⚡ The best answers connect your motivation to the type of work in this specific role.`;
+      }
+
+      if (msg.includes('resume') || msg.includes('cv')) {
+        return `📄 Resume Tips for Freshers:\n\n✅ Keep it 1 page\n✅ Use action verbs: built, developed, led, designed, improved\n✅ Quantify achievements: "handled 500+ requests/day", "reduced load time by 30%"\n✅ Add projects if you lack work experience — GitHub links are a bonus\n✅ Include a skills section with your tech stack\n✅ Tailor it slightly for each job\n\n🚫 Avoid: photos, long paragraphs, "References available on request"\n\n⚡ Use the Resume Review feature on this platform to get instant feedback!`;
+      }
+
+      if (msg.includes('how to prepare') || msg.includes('interview tips') || msg.includes('prepare')) {
+        return `🎯 Complete Interview Prep Checklist:\n\n1. 📚 Research the company (products, news, values)\n2. 🔄 Prepare 5–6 STAR stories: challenge, leadership, failure, teamwork, achievement\n3. 💻 Review technical skills relevant to the role\n4. ❓ Prepare 3 smart questions to ask the interviewer\n5. 🎤 Practice OUT LOUD — record yourself or do mock interviews\n6. 👔 Plan your outfit the day before\n7. 😴 Get a good night's sleep!\n\n⚡ Practice your answers aloud — it makes a huge difference on the day.`;
+      }
+
+      if (msg.includes('questions to ask') || msg.includes('ask the interviewer') || msg.includes('end of interview')) {
+        return `❓ Smart Questions to Ask the Interviewer:\n\n1. "What does success look like in this role in the first 90 days?"\n2. "What are the biggest challenges someone in this role typically faces?"\n3. "How would you describe the team culture?"\n4. "What growth or learning opportunities are available?"\n5. "What do you enjoy most about working here?"\n\n🚫 Avoid asking about salary, leave, or benefits in the first round.\n\n⚡ Good questions signal genuine interest — it's an easy way to stand out.`;
+      }
+
+      if (msg.includes('nervous') || msg.includes('anxiety') || msg.includes('scared')) {
+        return `😤 Interview nerves are completely normal!\n\nTips to manage them:\n\n✅ Prepare well — confidence comes from knowing your material\n✅ Do a mock interview first (use this platform!)\n✅ Breathe slowly before entering\n✅ Pause before answering — thinking time is fine and looks confident\n✅ Remember: the interviewer wants you to succeed\n\n💡 Reframe nerves as excitement — tell yourself "I'm excited" not "I'm nervous". Your brain releases the same chemicals.\n\n⚡ The more interviews you do, the easier they get.`;
+      }
+
+      // Default fallback
+      return `🤔 I'm not sure about that exact topic, but here are things I can help with:\n\n• Common questions: "Tell me about yourself", "What are your weaknesses?"\n• Methods: "STAR method", "How to prepare"\n• Topics: "salary negotiation", "handling conflict", "leadership"\n• Advice: "Resume tips", "Questions to ask the interviewer", "Interview anxiety"\n\nJust type your question or topic and I'll guide you!`;
+    }
+
+    // Dark mode
+    const themeToggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.onclick = () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    };
+  </script>
+</body>
+</html>

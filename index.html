@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interview Prep</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f2f5, #e8ecf1);
+    }
+
+    .homepage-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .feature-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      width: 300px;
+      padding: 20px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .feature-card a {
+      text-decoration: none;
+      background: #2575fc;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .feature-card a:hover {
+      background: #6a11cb;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <!-- 🔥 Side Slide Shelf -->
+    <div id="sideShelf" class="side-shelf">
+      <button class="close-btn" onclick="toggleShelf()">✖</button>
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://leetcode.com" target="_blank">🧩 LeetCode</a></li>
+        <li><a href="https://geeksforgeeks.org" target="_blank">📚 GeeksforGeeks</a></li>
+        <li><a href="https://hackerrank.com" target="_blank">💻 HackerRank</a></li>
+        <li><a href="https://linkedin.com" target="_blank">🔗 LinkedIn</a></li>
+        <li><a href="https://naukri.com" target="_blank">💼 Naukri</a></li>
+        <li><a href="https://indeed.com" target="_blank">📄 Indeed</a></li>
+      </ul>
+    </div>
+
+    <button class="shelf-toggle" onclick="toggleShelf()">☰</button>
+
+    <div class="banner">
+      <img src="banner.jpg.png" alt="Interview Preparation Banner" style="width:90%; max-height:250px; object-fit: cover;" />
+      <!--<div class="overlay">
+        <h1>Interview Preparation</h1>
+        <p>Practice with confidence and ace your interviews!</p>
+      </div>-->
+    </div>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="category-buttons">
+    <button onclick="switchCategory('HR')">HR</button>
+    <button onclick="switchCategory('Technical')">Technical</button>
+    <button onclick="switchCategory('Behavioral')">Behavioral</button>
+    <button onclick="switchCategory('DSA')">DSA</button>
+<button onclick="switchCategory('System Design')">System Design</button>
+    <a href="chatbot.html" class="chatbot-link">
+      <button>💬 Chat with AI</button>
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="homepage-wrapper">
+    <div class="feature-container">
+      <div class="feature-card">
+        <img src="assets/mock-interview.png" alt="Mock Interview" />
+        <h3>🎤 AV Mock Interview</h3>
+        <p>Simulate real interview scenarios using camera and mic recording.</p>
+        <a href="mock.html">Start AV Interview</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/text-interview.png" alt="Text Mock Interview" />
+        <h3>📝 Text-Based Mock</h3>
+        <p>Type your responses and receive instant feedback & evaluation.</p>
+        <a href="mock-text.html">Start Text Interview</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/resume-review.png" alt="Resume Review" />
+        <h3>📄 Resume Review</h3>
+        <p>Get resume improvement suggestions before applying for jobs.</p>
+        <a href="resume.html">Review Resume</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic QA List -->
+  <main>
+    <ul id="question-list" class="question-list"></ul>
+  </main>
+
+  <div class="download">
+    <button onclick="downloadAnswers()"><i class="fas fa-download"></i> Download My Answers</button>
+  </div>
+
+  <script src="script.js"></script>
+  <!-- Progress Tracker Widget -->
+<div id="progressTracker" style="
+  max-width: 800px; margin: 0 auto 40px; padding: 20px;
+  background: white; border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+">
+  <h3 style="margin-bottom:16px; font-size:1.1rem;">📊 Your Progress</h3>
+  <div id="trackerCategories" style="display:flex; flex-wrap:wrap; gap:16px;"></div>
+  <div style="margin-top:16px; text-align:right;">
+    <button onclick="resetProgress()" style="
+      background: #e74c3c; color: white; border: none;
+      padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+    ">🗑 Reset Progress</button>
+  </div>
+</div>
+</body>
+</html>

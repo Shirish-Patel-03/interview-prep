@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AV Mock Interview</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    .mock-av-wrapper { max-width: 700px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+    .dark-mode .mock-av-wrapper { background: #242424; }
+    .mock-av-wrapper video { margin: 15px 0; border-radius: 8px; background: #000; }
+    .mock-av-wrapper button { margin: 8px 6px; padding: 10px 18px; background: linear-gradient(135deg, #6a11cb, #2575fc); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: opacity 0.3s; }
+    .mock-av-wrapper button:hover { opacity: 0.85; }
+    .mock-av-wrapper button:disabled { background: #ccc; cursor: not-allowed; opacity: 1; }
+
+    .progress-bar-wrap { background: #e0e0e0; border-radius: 20px; height: 10px; margin: 10px 0 20px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, #6a11cb, #2575fc); transition: width 0.5s ease; }
+
+    #timer {
+      font-size: 2rem; font-weight: 700; color: #2575fc;
+      margin: 10px 0;
+    }
+    #timer.warning { color: #e74c3c; animation: pulse 0.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    #summary {
+      display: none; text-align: left;
+      background: #f0f2f5; border-radius: 10px; padding: 20px; margin-top: 20px;
+    }
+    .dark-mode #summary { background: #2a2a2a; }
+    #summary h3 { margin-bottom: 10px; color: #6a11cb; }
+    #summary ul { padding-left: 18px; }
+    #summary ul li { margin: 6px 0; font-size: 0.95rem; }
+
+    .question-counter { font-size: 0.9rem; color: #888; margin-bottom: 6px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div id="sideShelf" class="side-shelf">
+      <button class="close-btn" onclick="toggleShelf()">✖</button>
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://leetcode.com" target="_blank">🧩 LeetCode</a></li>
+        <li><a href="https://geeksforgeeks.org" target="_blank">📚 GeeksforGeeks</a></li>
+        <li><a href="https://hackerrank.com" target="_blank">💻 HackerRank</a></li>
+        <li><a href="https://linkedin.com" target="_blank">🔗 LinkedIn</a></li>
+        <li><a href="https://naukri.com" target="_blank">💼 Naukri</a></li>
+        <li><a href="https://indeed.com" target="_blank">📄 Indeed</a></li>
+      </ul>
+    </div>
+    <button class="shelf-toggle" onclick="toggleShelf()">☰</button>
+    <div class="banner">
+      <div class="overlay">
+        <h1>🎤 AV Mock Interview</h1>
+        <p>Record your answers and simulate a real-time interview!</p>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+  </header>
+
+  <main class="mock-av-wrapper">
+    <div class="question-counter" id="questionCounter">Question 1 of 5</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:20%"></div>
+    </div>
+
+    <h2 id="question">Loading question...</h2>
+
+    <div id="timer">2:00</div>
+
+    <video id="videoPreview" autoplay muted width="320" height="240"></video><br>
+
+    <button id="startBtn">▶ Start Recording</button>
+    <button id="stopBtn" disabled>⏹ Stop</button>
+    <button id="nextBtn">Next Question ➡</button>
+
+    <h3 id="recordedLabel" class="hidden">🎥 Your Answer:</h3>
+    <video id="recordedVideo" controls class="hidden" width="320" height="240"></video><br>
+    <a id="downloadLink" class="hidden" download="interview-response.webm">⬇ Download Recording</a>
+
+    <!-- Summary shown after all questions -->
+    <div id="summary">
+      <h3>🏁 Interview Complete!</h3>
+      <p style="margin-bottom:12px;">Here's how your session went:</p>
+      <ul id="summaryList"></ul>
+      <div style="margin-top:16px;padding:12px;background:#eef2ff;border-radius:8px;border-left:4px solid #2575fc;">
+        <strong>💡 Tips for improvement:</strong>
+        <ul style="margin-top:8px;padding-left:18px;">
+          <li>Use the STAR method for behavioral questions</li>
+          <li>Keep answers between 60–120 seconds</li>
+          <li>Maintain eye contact with the camera</li>
+          <li>Speak clearly and avoid filler words (um, uh, like)</li>
+        </ul>
+      </div>
+      <button onclick="restartInterview()" style="margin-top:16px;width:100%;">🔄 Restart Interview</button>
+    </div>
+  </main>
+
+  <script src="mock.js"></script>
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    }
+    themeToggle.onclick = () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    };
+    function toggleShelf() {
+      document.getElementById('sideShelf').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
