@@ -21,7 +21,11 @@ function displayQuestions(category) {
       ></textarea>
       <div style="margin-top:8px;">
         <button class="sample-toggle hidden" onclick="toggleSample(this)">💡 Show Sample Answer</button>
+<<<<<<< HEAD
         <button class="feedback-toggle hidden" onclick="generateFeedback(this, '${category}', ${index})">🔍 Get AI Feedback</button>
+=======
+        <button class="feedback-toggle hidden" onclick="generateFeedback(this, '${category}', ${index})">🔍 Get Feedback</button>
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
       </div>
       <div class="answer-box hidden">${q.answer}</div>
       <div class="feedback-box hidden"></div>
@@ -56,13 +60,18 @@ function toggleSample(btn) {
   btn.textContent = box.classList.contains('hidden') ? '💡 Show Sample Answer' : '🙈 Hide Sample Answer';
 }
 
+<<<<<<< HEAD
 async function generateFeedback(btn, category, index) {
+=======
+function generateFeedback(btn, category, index) {
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
   const li = btn.closest('li');
   const feedbackBox = li.querySelector('.feedback-box');
   const textarea = li.querySelector('textarea');
   const answer = textarea.value.trim();
   const question = allQuestions[category][index].question;
 
+<<<<<<< HEAD
   if (!answer || answer.length < 10) {
     feedbackBox.classList.remove('hidden');
     feedbackBox.textContent = '⚠️ Please write an answer first.';
@@ -123,6 +132,14 @@ Be specific, constructive, and encouraging. Keep total response under 200 words.
     }
     console.error(error);
   }
+=======
+  feedbackBox.classList.remove('hidden');
+  feedbackBox.textContent = '⏳ Analysing your answer...';
+
+  setTimeout(() => {
+    feedbackBox.textContent = smartFeedback(answer, question, category);
+  }, 600);
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 }
 
 function smartFeedback(answer, question, category) {
@@ -249,7 +266,11 @@ function toggleShelf() {
 }
 
 // Resume review — FIXED: real analysis instead of hardcoded text
+<<<<<<< HEAD
 async function reviewResume() {
+=======
+function reviewResume() {
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
   const input = document.getElementById('resumeInput').value.trim();
   const feedbackBox = document.getElementById('resumeFeedback');
 
@@ -259,6 +280,7 @@ async function reviewResume() {
     return;
   }
 
+<<<<<<< HEAD
   feedbackBox.classList.remove('hidden');
   feedbackBox.innerHTML = '⏳ AI is analysing your resume...';
 
@@ -323,6 +345,70 @@ Be specific, honest, and constructive. Reference actual content from their resum
     }
     console.error(error);
   }
+=======
+  const lower = input.toLowerCase();
+  const wordCount = input.split(/\s+/).length;
+  const issues = [];
+  const good = [];
+  let score = 0;
+
+  if (wordCount > 200) { score += 15; good.push('✅ Good content length.'); }
+  else { issues.push('⚠️ Resume seems short — make sure you pasted the complete content.'); }
+
+  const hasEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(input);
+  const hasPhone = /(\d{10}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\+\d{1,3}[\s-]\d+)/i.test(input);
+  if (hasEmail) { score += 10; good.push('✅ Email address found.'); }
+  else { issues.push('❌ No email found — your contact info must be clearly listed.'); }
+  if (hasPhone) { score += 5; good.push('✅ Phone number found.'); }
+  else { issues.push('⚠️ No phone number detected — add your contact number.'); }
+
+  if (lower.includes('education')) { score += 10; good.push('✅ Education section present.'); }
+  else { issues.push('❌ No Education section found.'); }
+
+  if (['experience','internship','work history'].some(w => lower.includes(w))) {
+    score += 15; good.push('✅ Experience/Internship section found.');
+  } else { issues.push('❌ No Experience section found — add internships, part-time, or freelance work.'); }
+
+  if (['skills','technologies','tools'].some(w => lower.includes(w))) {
+    score += 10; good.push('✅ Skills section found.');
+  } else { issues.push('❌ No Skills section — list technical and relevant soft skills.'); }
+
+  if (['project','projects','portfolio'].some(w => lower.includes(w))) {
+    score += 10; good.push('✅ Projects section found — great for freshers!');
+  } else { issues.push('💡 Add a Projects section — especially important if you have limited work experience.'); }
+
+  const actionVerbs = ['developed','built','designed','implemented','led','created','managed','improved','achieved','delivered','launched','automated'];
+  const foundVerbs = actionVerbs.filter(v => lower.includes(v));
+  if (foundVerbs.length >= 3) { score += 15; good.push(`✅ Strong action verbs used (${foundVerbs.slice(0,3).join(', ')}...).`); }
+  else { issues.push('💡 Use more strong action verbs: developed, built, led, implemented, achieved...'); }
+
+  const hasNumbers = /\d+%|\d+\s*(users|projects|members|clients|months|years|students|hours|times)/i.test(input);
+  if (hasNumbers) { score += 10; good.push('✅ Quantified achievements found — very effective!'); }
+  else { issues.push('💡 Quantify your impact: "Reduced load time by 40%", "Led team of 5", "Served 200+ users".'); }
+
+  const fillers = ['hardworking','team player','go-getter','passionate individual','detail oriented'];
+  const foundFillers = fillers.filter(f => lower.includes(f));
+  if (foundFillers.length > 0) {
+    issues.push(`❌ Remove cliché phrases like "${foundFillers[0]}" — show these traits through real accomplishments.`);
+  } else { score += 5; good.push('✅ No overused buzzwords detected.'); }
+
+  score = Math.min(score, 100);
+  const label = score >= 75 ? '🌟 Strong Resume' : score >= 50 ? '👍 Good — Can Be Improved' : '📝 Needs Significant Improvement';
+  const barColor = score >= 75 ? '#2ecc71' : score >= 50 ? '#f39c12' : '#e74c3c';
+
+  feedbackBox.innerHTML = `
+    <div style="margin-bottom:12px;">
+      <span style="font-size:2rem;font-weight:700;color:#2575fc;">${score}/100</span>
+      <span style="margin-left:12px;font-size:1rem;font-weight:600;">${label}</span>
+    </div>
+    <div style="background:#e0e0e0;border-radius:20px;height:12px;margin-bottom:18px;overflow:hidden;">
+      <div style="width:${score}%;height:100%;border-radius:20px;background:${barColor};transition:width 1s ease;"></div>
+    </div>
+    ${good.length ? `<div style="margin-bottom:14px;"><strong>✅ What's Good</strong><ul style="margin-top:6px;padding-left:18px;">${good.map(g=>`<li style="margin:5px 0;font-size:0.9rem;">${g}</li>`).join('')}</ul></div>` : ''}
+    ${issues.length ? `<div><strong>🔧 Improvements Needed</strong><ul style="margin-top:6px;padding-left:18px;">${issues.map(i=>`<li style="margin:5px 0;font-size:0.9rem;">${i}</li>`).join('')}</ul></div>` : ''}
+  `;
+  feedbackBox.classList.remove('hidden');
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 }
 
 // Fetch questions

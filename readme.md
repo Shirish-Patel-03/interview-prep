@@ -16,6 +16,7 @@ A fully frontend web application to help students and job seekers practice for i
 - **📊 Progress Tracker** — Track how many questions you've answered in each category
 - **📥 Download Answers** — Export all your written answers as a .txt file
 - **☰ Resource Shelf** — Quick links to LeetCode, GeeksforGeeks, LinkedIn, and more
+- **🤖 Gemini AI Integration** — Real AI-powered feedback on answers, intelligent resume analysis, and a fully conversational interview coaching chatbot powered by Google Gemini 2.5 Flash
 
 ---
 
@@ -39,6 +40,21 @@ interview-prep/
 ```
 
 ---
+
+
+## ⚙️ Configuration
+This project uses the Google Gemini API for AI features.
+1. Get a free API key from [aistudio.google.com](https://aistudio.google.com)
+2. Create a file called `config.js` in the root folder
+3. Add the following:
+```javascript
+const CONFIG = {
+  GEMINI_API_KEY: 'your_api_key_here'
+};
+```
+4. This file is in `.gitignore` and will never be pushed to GitHub
+
+
 
 ## 🚀 Getting Started (Run Locally)
 
@@ -67,6 +83,8 @@ No installation needed. This is a pure HTML/CSS/JS project.
 | MediaRecorder API | Camera/mic recording |
 | Fetch API | Loading questions from JSON |
 | LocalStorage | Dark mode preference persistence |
+| Google Gemini API | AI-powered feedback, chatbot, and resume review |
+| Fetch API | Asynchronous API calls to Gemini |
 
 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment variables
 .env
 .env.local
@@ -5,12 +6,23 @@
 # API config - never commit
 config.js
 
+=======
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 # System files
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 # VS Code
 .vscode/
 
+=======
+# VS Code settings
+.vscode/
+
+# Node 
+node_modules/
+
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 # Logs
 *.log

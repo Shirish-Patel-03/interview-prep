@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
   <script src="config.js"></script>
+=======
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 </head>
 <body>
   <header class="header">
@@ -67,6 +70,7 @@
         const key = currentCategory + '-' + i;
         const box = document.createElement('div');
         box.className = 'question-box';
+<<<<<<< HEAD
         box.innerHTML = `
   <h3>${i + 1}. ${q.question}</h3>
   <textarea
@@ -80,6 +84,13 @@
   <div class="answer-box hidden" id="sample-${key}">${q.answer}</div>
   <div class="feedback-box hidden" id="fb-${key}"></div>
 `;
+=======
+        box.innerHTML =
+          '<h3>' + (i+1) + '. ' + q.question + '</h3>' +
+          '<textarea placeholder="Write your answer here..." oninput="handleTyping(\'' + key + '\', this.value)">' + (userAnswers[key] || '') + '</textarea>' +
+          '<button onclick="generateFeedback(\'' + key + '\', \'' + currentCategory + '\')">💬 Get Feedback</button>' +
+          '<div class="feedback-box hidden" id="fb-' + key + '"></div>';
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
         container.appendChild(box);
       });
     }
@@ -117,6 +128,7 @@
       return tips.join('\n\n') + '\n\n📊 Word count: ' + wordCount + ' words';
     }
 
+<<<<<<< HEAD
    async function getFeedback(key, index) {
   const feedbackDiv = document.getElementById('fb-' + key);
   const answer = (userAnswers[key] || '').trim();
@@ -182,6 +194,14 @@ Be specific, constructive, and encouraging. Keep total response under 200 words.
     console.error(error);
   }
 }
+=======
+    function generateFeedback(key, category) {
+      const feedbackDiv = document.getElementById('fb-' + key);
+      feedbackDiv.innerText = analyzeFeedback(userAnswers[key] || '', category);
+      feedbackDiv.classList.remove('hidden');
+      feedbackDiv.style.whiteSpace = 'pre-wrap';
+    }
+>>>>>>> e07c00a75ce5281b9e8e20f52c78040d40d06178
 
     function downloadTextAnswers() {
       const answered = Object.keys(userAnswers).filter(k => userAnswers[k].trim());
