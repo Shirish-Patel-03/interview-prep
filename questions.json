@@ -1,0 +1,283 @@
+{
+  "HR": [
+    {
+      "question": "Tell me about yourself.",
+      "answer": "I'm a computer science student passionate about software development and problem-solving..."
+    },
+    {
+      "question": "Why do you want to work here?",
+      "answer": "Your company values innovation and growth, which align with my personal and professional goals..."
+    },
+    {
+      "question": "What are your strengths?",
+      "answer": "I’m highly adaptable, organized, and enjoy working collaboratively on challenging problems..."
+    },
+    {
+      "question": "What are your weaknesses?",
+      "answer": "I can be overly detail-focused, but I’m working on balancing that with timely delivery..."
+    },
+    {
+      "question": "Where do you see yourself in 5 years?",
+      "answer": "I see myself as a senior developer contributing to impactful projects and mentoring juniors..."
+    },
+    {
+      "question": "How do you handle stress?",
+      "answer": "I manage stress by staying organized, taking short breaks, and focusing on one task at a time..."
+    },
+    {
+      "question": "What motivates you?",
+      "answer": "Learning new things, solving problems, and creating useful applications that help people..."
+    },
+    {
+      "question": "Describe your ideal work environment.",
+      "answer": "A collaborative, supportive team with opportunities to learn, experiment, and grow..."
+    },
+    {
+      "question": "What do you know about our company?",
+      "answer": "You're known for innovation and a strong tech culture, especially in AI and scalable products..."
+    },
+    {
+      "question": "How do you handle feedback?",
+      "answer": "I welcome constructive feedback and use it to improve both technically and personally..."
+    },
+    {
+      "question": "Why should we hire you?",
+      "answer": "I bring a strong foundation in coding, a proactive mindset, and a passion for learning..."
+    },
+    {
+      "question": "How do you prioritize tasks?",
+      "answer": "I assess urgency and importance, then break work into manageable chunks using tools like Notion or Trello..."
+    },
+    {
+      "question": "How do you stay organized?",
+      "answer": "I use to-do lists, calendars, and kanban boards to stay on top of my academic and project deadlines..."
+    },
+    {
+      "question": "Tell me something not on your resume.",
+      "answer": "I run a small YouTube channel where I share coding tips and interview prep advice..."
+    },
+    {
+      "question": "What are your hobbies?",
+      "answer": "I enjoy coding mini games, exploring AI tools, and playing chess during my free time..."
+    },
+    {
+      "question": "How do you handle failure?",
+      "answer": "I reflect on what went wrong, adjust my strategy, and come back stronger the next time..."
+    },
+    {
+      "question": "What do you expect from this job?",
+      "answer": "Opportunities to learn, contribute meaningfully, and work with a team that values innovation..."
+    },
+    {
+      "question": "What are your salary expectations?",
+      "answer": "I’m open and more focused on learning and contributing. I trust you’ll offer a fair package for my skills and role..."
+    },
+    {
+      "question": "Are you willing to relocate?",
+      "answer": "Yes, I'm open to relocation if it helps me grow professionally and aligns with my goals..."
+    },
+    {
+      "question": "Do you prefer remote or in-office work?",
+      "answer": "Both have benefits, but I enjoy the flexibility of hybrid setups for balance and productivity..."
+    }
+  ],
+  "Technical": [
+    {
+      "question": "What is a REST API?",
+      "answer": "REST API is a way for systems to communicate over HTTP using standard methods like GET, POST, PUT, DELETE..."
+    },
+    {
+      "question": "What is a closure in JavaScript?",
+      "answer": "A closure is a function that retains access to its parent scope even after the outer function has returned..."
+    },
+    {
+      "question": "What’s the difference between == and === in JavaScript?",
+      "answer": "`==` checks value, `===` checks value and type (strict equality)..."
+    },
+    {
+      "question": "What is Big O Notation?",
+      "answer": "It describes the performance or complexity of an algorithm in terms of input size..."
+    },
+    {
+      "question": "What is the difference between stack and heap?",
+      "answer": "Stack is for static memory (function calls), heap is for dynamic memory (objects, arrays)..."
+    },
+    {
+      "question": "What’s the difference between frontend and backend?",
+      "answer": "Frontend is what users see and interact with; backend is server-side logic, databases, and APIs..."
+    },
+    {
+      "question": "What is Git, and why is it used?",
+      "answer": "Git is a version control system that helps track changes and collaborate on code efficiently..."
+    },
+    {
+      "question": "What are the four principles of OOP?",
+      "answer": "Encapsulation, Abstraction, Inheritance, and Polymorphism..."
+    },
+    {
+      "question": "What is a database index?",
+      "answer": "An index speeds up data retrieval operations by creating a lookup reference for faster access..."
+    },
+    {
+      "question": "What’s the difference between SQL and NoSQL?",
+      "answer": "SQL databases use structured schemas, NoSQL is schema-less and good for unstructured data..."
+    },
+    {
+      "question": "Explain event bubbling in JavaScript.",
+      "answer": "It’s when an event starts at the most specific element and bubbles up to the least specific (the root)..."
+    },
+    {
+      "question": "What is responsive design?",
+      "answer": "Responsive design ensures your app looks good on all devices by using flexible layouts and media queries..."
+    },
+    {
+      "question": "What are HTTP status codes?",
+      "answer": "They represent response states: 200 (OK), 404 (Not Found), 500 (Server Error), etc..."
+    },
+    {
+      "question": "What’s the difference between localStorage and sessionStorage?",
+      "answer": "localStorage persists data even after the browser closes; sessionStorage clears it after session ends..."
+    },
+    {
+      "question": "What is a promise in JavaScript?",
+      "answer": "A promise represents a value that may be available now, later, or never — used for async operations..."
+    },
+    {
+      "question": "What is a foreign key in databases?",
+      "answer": "A foreign key links one table to another, ensuring referential integrity between records..."
+    },
+    {
+      "question": "What is API throttling?",
+      "answer": "It limits the number of requests a user/client can make to prevent overloading a server..."
+    },
+    {
+      "question": "Explain responsive vs adaptive design.",
+      "answer": "Responsive adjusts fluidly to screen size; adaptive uses fixed layouts tailored to specific breakpoints..."
+    },
+    {
+      "question": "What is recursion?",
+      "answer": "Recursion is a function calling itself to solve smaller parts of a problem until a base condition is met..."
+    },
+    {
+      "question": "What’s the difference between PUT and PATCH?",
+      "answer": "PUT replaces an entire resource; PATCH updates only part of the resource..."
+    }
+  ],
+  "Behavioral": [
+    {
+      "question": "Describe a time you faced a challenge.",
+      "answer": "While working on a deadline, our team hit a blocker. I proposed breaking the problem into steps and we solved it efficiently..."
+    },
+    {
+      "question": "Tell me about a time you worked in a team.",
+      "answer": "In a group project, I handled the frontend and collaborated closely with backend devs to integrate features..."
+    },
+    {
+      "question": "Tell me about a failure and how you handled it.",
+      "answer": "I once underestimated a task and missed a deadline. I learned to plan better and communicate early..."
+    },
+    {
+      "question": "Give an example of leadership.",
+      "answer": "I led a small team during a hackathon, assigning roles and keeping everyone motivated. We placed 2nd!"
+    },
+    {
+      "question": "Describe a time you had to learn something quickly.",
+      "answer": "I had to learn React in a week for a freelance project. I followed tutorials, built a sample app, and delivered successfully..."
+    },
+    {
+      "question": "How do you handle criticism?",
+      "answer": "I listen without reacting, ask clarifying questions, and see how I can improve moving forward..."
+    },
+    {
+      "question": "Tell me about a time you went above and beyond.",
+      "answer": "In a college fest, I built a mini event management site within 48 hours to help organizers manage volunteers..."
+    },
+    {
+      "question": "How do you prioritize tasks in a busy schedule?",
+      "answer": "I break things down, use priority labels, and stick to a daily to-do list to stay on track..."
+    },
+    {
+      "question": "Give an example of when you solved a problem creatively.",
+      "answer": "To debug a difficult bug, I created a simplified demo app to isolate the issue — it saved hours of work..."
+    },
+    {
+      "question": "Describe a situation where you disagreed with a teammate.",
+      "answer": "We disagreed on a design choice. I listened to their reasoning and we tested both options before deciding..."
+    },
+    {
+      "question": "How do you stay motivated?",
+      "answer": "I set small milestones and reward myself when I hit them. I also remind myself of the bigger goal..."
+    },
+    {
+      "question": "Describe a time you had to multitask.",
+      "answer": "During finals, I juggled exam prep and an internship. I used strict scheduling to manage both..."
+    },
+    {
+      "question": "What do you do when you feel overwhelmed?",
+      "answer": "I step back, reorganize my task list, and focus on one thing at a time to avoid burnout..."
+    },
+    {
+      "question": "Have you ever mentored or helped someone learn?",
+      "answer": "Yes, I helped a junior learn Git and GitHub workflows for a project and guided them through their first PR..."
+    },
+    {
+      "question": "What’s your approach to conflict resolution?",
+      "answer": "I address issues directly but respectfully, ensuring we focus on the problem, not the person..."
+    },
+    {
+      "question": "Tell me about a time you worked under pressure.",
+      "answer": "A last-minute bug crashed our app demo. I stayed calm, debugged quickly, and got it working in time..."
+    },
+    {
+      "question": "Have you ever had to motivate a teammate?",
+      "answer": "Yes, a teammate felt lost during a sprint. I helped them break the task down and encouraged them — they finished on time..."
+    },
+    {
+      "question": "Tell me about a time you had to adapt.",
+      "answer": "Mid-project, our requirements changed. I adjusted the UI plan and coordinated with the backend team to keep things aligned..."
+    },
+    {
+      "question": "What do you do when you're stuck on a problem?",
+      "answer": "I try to break it into smaller parts, research, and ask for help if needed. I also take breaks to clear my mind..."
+    },
+    {
+      "question": "Describe a time you received praise.",
+      "answer": "A professor appreciated my initiative to redesign our class site. It felt rewarding to be recognized for taking ownership..."
+    }
+  ],
+  
+"DSA": [
+  { "question": "What is the difference between an array and a linked list?", "answer": "Arrays have fixed size and allow O(1) random access. Linked lists are dynamic and allow O(1) insertion/deletion at head, but O(n) access." },
+  { "question": "What is Big O Notation?", "answer": "It describes the worst-case time or space complexity of an algorithm as input size grows." },
+  { "question": "Explain how a binary search works.", "answer": "Binary search repeatedly halves the search space by comparing the target with the middle element. Requires a sorted array. O(log n) time." },
+  { "question": "What is a stack and where is it used?", "answer": "A stack is LIFO (Last In First Out). Used in function call management, undo operations, and expression parsing." },
+  { "question": "What is a queue and where is it used?", "answer": "A queue is FIFO (First In First Out). Used in scheduling, BFS traversal, and print spooling." },
+  { "question": "What is recursion? Give an example.", "answer": "A function calling itself with a base case to stop. Example: factorial(n) = n * factorial(n-1), base: factorial(0) = 1." },
+  { "question": "What is the difference between BFS and DFS?", "answer": "BFS explores level by level using a queue. DFS explores as deep as possible using a stack or recursion. BFS finds shortest path in unweighted graphs." },
+  { "question": "What is a hash table and how does it handle collisions?", "answer": "A hash table maps keys to values using a hash function. Collisions are handled via chaining (linked lists) or open addressing (probing)." },
+  { "question": "What is dynamic programming?", "answer": "DP solves problems by breaking them into overlapping subproblems and storing results to avoid redundant computation (memoization or tabulation)." },
+  { "question": "What is the time complexity of quicksort?", "answer": "Average case O(n log n), worst case O(n²) when the pivot is always the smallest or largest element. In-place sort." },
+  { "question": "What is a binary tree vs a binary search tree?", "answer": "A binary tree has at most 2 children per node. A BST adds the rule: left child < parent < right child, enabling O(log n) search." },
+  { "question": "How does merge sort work?", "answer": "Merge sort divides the array in half recursively, sorts each half, then merges them. Time: O(n log n). Space: O(n). Stable sort." },
+  { "question": "What is a greedy algorithm?", "answer": "A greedy algorithm makes the locally optimal choice at each step, hoping to find a global optimum. Example: Dijkstra's algorithm, activity selection." },
+  { "question": "What is the difference between a min-heap and a max-heap?", "answer": "In a min-heap, the parent is always smaller than its children. In a max-heap, the parent is always larger. Used in priority queues." },
+  { "question": "What is two-pointer technique and when do you use it?", "answer": "Two pointers move from different ends or positions in an array to solve problems in O(n) instead of O(n²). Used in finding pairs, triplets, or subarrays." }
+],
+"System Design": [
+  { "question": "What is scalability and what are the two types?", "answer": "Scalability is a system's ability to handle growth. Vertical scaling adds more resources to one server. Horizontal scaling adds more servers." },
+  { "question": "What is a load balancer and why is it used?", "answer": "A load balancer distributes incoming requests across multiple servers to prevent overload, improve availability, and ensure fault tolerance." },
+  { "question": "What is caching and when should you use it?", "answer": "Caching stores frequently accessed data in fast storage (like RAM). Use it to reduce database load, lower latency, and handle repeated requests efficiently." },
+  { "question": "What is the difference between SQL and NoSQL databases?", "answer": "SQL uses structured schemas and supports ACID transactions. NoSQL is schema-flexible, better for unstructured data, and scales horizontally more easily." },
+  { "question": "What is a CDN (Content Delivery Network)?", "answer": "A CDN is a network of servers distributed globally that cache and serve static assets close to the user, reducing latency and load on origin servers." },
+  { "question": "What is a microservices architecture?", "answer": "Microservices break an application into small, independently deployable services. Each handles one function and communicates via APIs. Better than a large monolith for scaling." },
+  { "question": "What is CAP theorem?", "answer": "CAP theorem states a distributed system can only guarantee 2 of 3: Consistency, Availability, and Partition tolerance. You must make tradeoffs." },
+  { "question": "What is a message queue and why is it useful?", "answer": "A message queue (like RabbitMQ or Kafka) lets services communicate asynchronously. Useful for decoupling services, handling traffic spikes, and background jobs." },
+  { "question": "What is database sharding?", "answer": "Sharding splits a large database into smaller partitions (shards) stored on different servers. It improves performance and allows horizontal scaling." },
+  { "question": "How would you design a URL shortener?", "answer": "Use a hash or counter to generate short codes. Store the mapping in a key-value store (like Redis). Add a redirect service. Consider caching popular URLs and handling collisions." },
+  { "question": "What is an API gateway?", "answer": "An API gateway is an entry point that routes client requests to the appropriate microservice. It handles authentication, rate limiting, logging, and load balancing." },
+  { "question": "What is eventual consistency?", "answer": "In a distributed system, eventual consistency means all nodes will eventually have the same data, but may temporarily be out of sync. Tradeoff for high availability." },
+  { "question": "What is rate limiting and why is it important?", "answer": "Rate limiting controls how many requests a client can make in a time window. Prevents abuse, protects backend resources, and ensures fair usage." },
+  { "question": "How would you design a notification system?", "answer": "Use a message queue to decouple sending from triggering. Store preferences in a DB. Use push for mobile, email service for email, WebSockets for real-time. Fan-out for multiple recipients." },
+  { "question": "What is the difference between monolithic and microservices architecture?", "answer": "Monolithic: all components in one deployable unit — simpler but harder to scale. Microservices: independent services — more complex but each scales independently." }
+]
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text Mock Interview</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="config.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="banner">
+      <img src="banner.jpg" alt="Banner" onerror="this.style.display='none'">
+      <div class="overlay">
+        <h1>📝 Text-Based Mock Interview</h1>
+        <p>Answer questions by typing and get feedback instantly</p>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+  </header>
+
+  <div class="category-buttons">
+    <button onclick="switchCategory('HR')">HR</button>
+    <button onclick="switchCategory('Technical')">Technical</button>
+    <button onclick="switchCategory('Behavioral')">Behavioral</button>
+    <button onclick="switchCategory('DSA')">DSA</button>
+<button onclick="switchCategory('System Design')">System Design</button>
+  </div>
+
+  <main class="text-mock-wrapper" id="textMockContainer">
+    <p style="text-align:center; color:#888;">Loading questions...</p>
+  </main>
+
+  <div class="download">
+    <button onclick="downloadTextAnswers()">📥 Download My Answers</button>
+  </div>
+
+  <script>
+    let allQuestions = {};
+    let currentCategory = 'HR';
+    let userAnswers = {};
+
+    function switchCategory(category) {
+      currentCategory = category;
+      renderQuestions();
+    }
+
+    function loadQuestions() {
+      fetch('questions.json')
+        .then(res => res.json())
+        .then(data => {
+          allQuestions = data;
+          renderQuestions();
+        })
+        .catch(() => {
+          document.getElementById('textMockContainer').innerHTML =
+            '<p style="text-align:center;color:red;">Could not load questions.json. Make sure all files are in the same folder.</p>';
+        });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('textMockContainer');
+      container.innerHTML = '';
+      allQuestions[currentCategory].forEach((q, i) => {
+        const key = currentCategory + '-' + i;
+        const box = document.createElement('div');
+        box.className = 'question-box';
+        box.innerHTML = `
+  <h3>${i + 1}. ${q.question}</h3>
+  <textarea
+    placeholder="Type your answer here..."
+    oninput="handleTyping('${key}', this.value)"
+  ></textarea>
+  <div>
+    <button onclick="showSample(${i})">💡 Sample Answer</button>
+    <button onclick="getFeedback('${key}', ${i})">🔍 Get AI Feedback</button>
+  </div>
+  <div class="answer-box hidden" id="sample-${key}">${q.answer}</div>
+  <div class="feedback-box hidden" id="fb-${key}"></div>
+`;
+        container.appendChild(box);
+      });
+    }
+
+    function handleTyping(key, value) {
+      userAnswers[key] = value;
+    }
+
+    function analyzeFeedback(answer, category) {
+      if (!answer || answer.trim().length < 20) return '⚠️ Too short. Write at least 2-3 sentences.';
+      const wordCount = answer.split(/\s+/).length;
+      const lower = answer.toLowerCase();
+      const tips = [];
+
+      if (wordCount < 30) tips.push('📝 Expand to at least 40-60 words for a strong response.');
+
+      if (category === 'Behavioral') {
+        if (!/when|once|during/.test(lower)) tips.push('📌 Set the scene - describe when/where this happened.');
+        if (!/\bi (did|decided|took|helped|worked|built|led)\b/.test(lower)) tips.push('🎯 Emphasize YOUR actions using "I" statements.');
+        if (!/result|outcome|success|improved|achieved/.test(lower)) tips.push('🏆 Include the result or outcome!');
+        if (tips.length === 0) tips.push('✅ Great STAR structure! Specific, personal, and results-driven.');
+      }
+      if (category === 'Technical') {
+        if (!/example|instance|such as|e\.g/.test(lower)) tips.push('💡 Add a real-world example or use case.');
+        if (tips.length === 0) tips.push('✅ Solid answer! A concrete example would make it memorable.');
+      }
+      if (category === 'HR') {
+        if (!/i (believe|feel|value|enjoy|am|have)/.test(lower)) tips.push('🙋 Make it personal - use "I believe/I value..."');
+        const generic = ['hardworking','team player','passionate'].filter(p => lower.includes(p));
+        if (generic.length && wordCount < 50) tips.push('⚠️ Back up buzzwords with a specific example.');
+        if (tips.length === 0) tips.push('✅ Clear and personal! Add a specific achievement to stand out.');
+      }
+
+      if (tips.length === 0 && wordCount >= 50) return '✅ Excellent answer! Detailed and well-structured. (' + wordCount + ' words)';
+      return tips.join('\n\n') + '\n\n📊 Word count: ' + wordCount + ' words';
+    }
+
+   async function getFeedback(key, index) {
+  const feedbackDiv = document.getElementById('fb-' + key);
+  const answer = (userAnswers[key] || '').trim();
+  const question = allQuestions[currentCategory][index].question;
+
+  if (!answer || answer.length < 10) {
+    feedbackDiv.classList.remove('hidden');
+    feedbackDiv.textContent = '⚠️ Please write an answer first.';
+    return;
+  }
+
+  feedbackDiv.classList.remove('hidden');
+  feedbackDiv.textContent = '⏳ AI is analysing your answer...';
+
+  const prompt = `You are an expert interview coach. A candidate is practising for a ${currentCategory} interview question.
+
+Question: "${question}"
+Category: ${currentCategory}
+Candidate's Answer: "${answer}"
+
+Analyse this answer and provide feedback in this exact format:
+
+Score: [X/100]
+Verdict: [one line summary]
+
+✅ Strengths:
+- [point 1]
+- [point 2]
+
+⚠️ Areas to Improve:
+- [point 1]
+- [point 2]
+
+💡 Tip:
+[One specific actionable tip for this exact question]
+
+Be specific, constructive, and encouraging. Keep total response under 200 words.`;
+
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }]
+        })
+      }
+    );
+
+    if (!response.ok) throw new Error(`${response.status}`);
+
+    const data = await response.json();
+    const reply = data.candidates[0].content.parts[0].text;
+    feedbackDiv.textContent = reply;
+
+  } catch (error) {
+    if (error.message.includes('429')) {
+      feedbackDiv.textContent = '⏳ Too many requests — wait a moment and try again.';
+    } else {
+      feedbackDiv.textContent = '⚠️ Could not get feedback. Please try again.';
+    }
+    console.error(error);
+  }
+}
+
+    function downloadTextAnswers() {
+      const answered = Object.keys(userAnswers).filter(k => userAnswers[k].trim());
+      if (!answered.length) { alert('No answers to download yet!'); return; }
+      let text = '=== MY TEXT MOCK INTERVIEW ANSWERS ===\n\n';
+      answered.forEach(key => {
+        const parts = key.split('-');
+        const cat = parts[0];
+        const idx = parseInt(parts[1]);
+        const q = allQuestions[cat] && allQuestions[cat][idx];
+        if (q) text += '[' + cat.toUpperCase() + '] ' + q.question + '\nAnswer: ' + userAnswers[key] + '\n' + '─'.repeat(50) + '\n\n';
+      });
+      const blob = new Blob([text], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.download = 'text-mock-answers.txt';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    if (localStorage.getItem('darkMode') === 'true') { body.classList.add('dark-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+    themeToggle.onclick = () => {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    };
+
+    loadQuestions();
+  </script>
+</body>
+</html>

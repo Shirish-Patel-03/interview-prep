@@ -1,0 +1,16 @@
+# Environment variables
+.env
+.env.local
+
+# API config - never commit
+config.js
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
